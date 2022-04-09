@@ -1,0 +1,30 @@
+{
+  "name": "sakuya",
+  "version": "1.0.0",
+  "description": "你的智慧分身(也许",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "vite": "^2.6.4"
+  },
+  "dependencies": {
+    "frappe-charts": "^1.6.2",
+    "neataptic": "^1.4.7",
+    "p5": "^1.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InvisibleFuture/sakuya.git"
+  },
+  "author": "satori.love",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InvisibleFuture/sakuya/issues"
+  },
+  "homepage": "https://github.com/InvisibleFuture/sakuya#readme"
+}
