@@ -1,38 +1,36 @@
 import Matrix from './widgets/matrix.js'
 import convolutionMatrix from './tools/convolutionMatrix.js'
 
-let matrix = new Matrix(32, 32)
+const matrix = new Matrix(32, 32)
 document.body.appendChild(matrix.element)
 
 // DEMO
-var canvas = document.createElement("canvas"),   //获取Canvas画布对象
-  context = canvas.getContext('2d');  //获取2D上下文对象，大多数Canvas API均为此对象方法
-var image = new Image();  //定义一个图片对象
-image.src = 'img/00010-938548211.png';
-image.onload = function () {  //此处必须注意！后面所有操作均需在图片加载成功后执行，否则图片将处理无效
-  context.drawImage(image, 0, 0);  //将图片从Canvas画布的左上角(0,0)位置开始绘制，大小默认为图片实际大小
-  var handle = document.createElement("button");
-  var create = document.createElement("button");
-  document.body.appendChild(handle)
-  document.body.appendChild(create)
-  handle.innerText = "处理图片"
-  create.innerText = "生成图片"
-  handle.onclick = function () {  // 单击“处理图片”按钮，处理图片
-    var imgData = context.getImageData(0, 0, canvas.width, canvas.height);   //获取图片数据对象
-    var average = 0; //获取图片数据数组，该数组中每个像素用4个元素来保存，分别表示红、绿、蓝和透明度值
+const canvas = document.createElement("canvas")
+const context = canvas.getContext('2d')
+const image = new Image()
 
-    //// 灰度处理
-    //for (var i = 0; i < imgData.data.length; i += 4) {
-    //  average = Math.floor((imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3);  //将红、绿、蓝色值求平均值后得到灰度值
-    //  imgData.data[i] = imgData.data[i + 1] = imgData.data[i + 2] = average; //将每个像素点的色值重写
-    //  //matrix.setItem(i, 1, 125)
-    //  //console.log(imgData.data[i])
-    //  //matrix.setIndex(i / 4, imgData.data[i])
-    //}
-    //context.putImageData(imgData, 0, 0);  //将处理后的图像数据重写至Canvas画布，此时画布中图像变为黑白色
-
-  };
-
+image.src = 'img/00010-938548211.png'
+image.onload = function () {
+  context.drawImage(image, 0, 0)
+  //let handle = document.createElement("button")
+  //let create = document.createElement("button")
+  //document.body.appendChild(handle)
+  //document.body.appendChild(create)
+  //handle.innerText = "处理图片"
+  //create.innerText = "生成图片"
+  //handle.onclick = function () {
+  //  let imgData = context.getImageData(0, 0, canvas.width, canvas.height)
+  //  let average = 0
+  //  //// 灰度处理
+  //  //for (var i = 0; i < imgData.data.length; i += 4) {
+  //  //  average = Math.floor((imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3);  //将红、绿、蓝色值求平均值后得到灰度值
+  //  //  imgData.data[i] = imgData.data[i + 1] = imgData.data[i + 2] = average; //将每个像素点的色值重写
+  //  //  //matrix.setItem(i, 1, 125)
+  //  //  //console.log(imgData.data[i])
+  //  //  //matrix.setIndex(i / 4, imgData.data[i])
+  //  //}
+  //  //context.putImageData(imgData, 0, 0);  //将处理后的图像数据重写至Canvas画布，此时画布中图像变为黑白色
+  //};
   //create.onclick = function () {  // 单击“生成图片”按钮，导出图片
   //  var imgSrc = canvas.toDataURL();  //获取图片的DataURL
   //  var newImg = new Image();
@@ -44,7 +42,8 @@ image.onload = function () {  //此处必须注意！后面所有操作均需在
   //  //matrix.setItem(2, 0, 125)
   //};
 
-  let imgData = context.getImageData(0, 0, canvas.width, canvas.height);   //获取图片数据对象
+  //获取图片数据对象
+  let imgData = context.getImageData(0, 0, canvas.width, canvas.height)
 
   // 分离通道
   let R = []
@@ -63,17 +62,22 @@ image.onload = function () {  //此处必须注意！后面所有操作均需在
   }
   context.putImageData(imgData, 0, 0);
 
-  // 10 层神经网络
-  for (let i = 0; i < 10; i++) {
-    // 滤波器
-    context.putImageData(convolutionMatrix(imgData, [
-      //-1, -1, 0,
-      //-1, 1, 1,
-      //0, 1, 1,
-      -2, -1, 0,
-      1, -1, 1,
-      8, 0, -4
-    ]), 0, 0)
+  //// 10 层滤波器
+  //for (let i = 0; i < 10; i++) {
+  //  context.putImageData(convolutionMatrix(imgData, [
+  //    //-1, -1, 0,
+  //    //-1, 1, 1,
+  //    //0, 1, 1,
+  //    -2, -1, 0,
+  //    1, -1, 1,
+  //    8, 0, -4
+  //  ]), 0, 0)
+  //}
+
+  // 将图像展示到矩阵中
+  for (var i = 0; i < imgData.data.length && i < 4096; i += 4) {
+    console.log(i)
+    matrix.setItem(i / 4, 0, imgData.data[i])
   }
 
   //let ctx = this
