@@ -8,7 +8,7 @@ document.body.appendChild(matrix.element)
 var canvas = document.createElement("canvas"),   //获取Canvas画布对象
   context = canvas.getContext('2d');  //获取2D上下文对象，大多数Canvas API均为此对象方法
 var image = new Image();  //定义一个图片对象
-image.src = 'img/img.jpeg';
+image.src = 'img/00010-938548211.png';
 image.onload = function () {  //此处必须注意！后面所有操作均需在图片加载成功后执行，否则图片将处理无效
   context.drawImage(image, 0, 0);  //将图片从Canvas画布的左上角(0,0)位置开始绘制，大小默认为图片实际大小
   var handle = document.createElement("button");
@@ -21,7 +21,7 @@ image.onload = function () {  //此处必须注意！后面所有操作均需在
     var imgData = context.getImageData(0, 0, canvas.width, canvas.height);   //获取图片数据对象
     var average = 0; //获取图片数据数组，该数组中每个像素用4个元素来保存，分别表示红、绿、蓝和透明度值
 
-    // 灰度处理
+    //// 灰度处理
     //for (var i = 0; i < imgData.data.length; i += 4) {
     //  average = Math.floor((imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3);  //将红、绿、蓝色值求平均值后得到灰度值
     //  imgData.data[i] = imgData.data[i + 1] = imgData.data[i + 2] = average; //将每个像素点的色值重写
