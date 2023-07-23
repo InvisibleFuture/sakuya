@@ -76,7 +76,6 @@ image.onload = function () {
 
   // 将图像展示到矩阵中
   for (var i = 0; i < imgData.data.length && i < 4096; i += 4) {
-    console.log(i)
     matrix.setItem(i / 4, 0, imgData.data[i])
   }
 
